@@ -1,0 +1,22 @@
+# Build files
+/build/
+/out/
+/bin/
+
+# Gradle cache
+.gradle/
+!/.gradle/wrapper/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
