@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.6'
 	id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.liquibase.gradle' version "2.2.2"
 }
 
 group = 'com.app.gym'
@@ -33,7 +34,23 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    liquibaseRuntime 'org.liquibase:liquibase-core'
+    liquibaseRuntime 'org.postgresql:postgresql'
+    liquibaseRuntime 'info.picocli:picocli:4.7.1'
+    testImplementation 'org.liquibase:liquibase-core'
+}
+
+liquibase {
+    def dbName = System.properties['dbName'] ?: 'gym_db'
+    activities {
+        main {
+            changeLogFile 'build.migrations/db/changelog.xml'
+            url "jdbc:postgresql://localhost:5432/$dbName"
+            username 'admin'
+            password 'admin123'
+        }
+    }
 }
 
 tasks.named('test') {
