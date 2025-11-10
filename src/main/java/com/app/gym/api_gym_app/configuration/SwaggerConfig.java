@@ -61,14 +61,14 @@ public class SwaggerConfig {
     }
 
 
-    private Schema getSchema(Class className) {
+    private Schema<?> getSchema(Class<?> className) {
         ResolvedSchema resolvedSchema = ModelConverters.getInstance()
                 .resolveAsResolvedSchema(
                         new AnnotatedType(className).resolveAsRef(false));
         return resolvedSchema.schema;
     }
 
-    private Schema getSchemaRef(Class className) {
+    private Schema<?> getSchemaRef(Class<?> className) {
         ResolvedSchema resolvedSchema = ModelConverters.getInstance()
                 .resolveAsResolvedSchema(
                         new AnnotatedType(className).resolveAsRef(true));
