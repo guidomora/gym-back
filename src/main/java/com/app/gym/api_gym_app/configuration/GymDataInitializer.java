@@ -20,7 +20,7 @@ public class GymDataInitializer {
             "Fitter"
     );
 
-    @PostConstruct
+//    @PostConstruct
     public void initializeGyms() {
         DEFAULT_GYMS.forEach(gymName ->
                 gymRepository.findByNombreIgnoreCase(gymName)

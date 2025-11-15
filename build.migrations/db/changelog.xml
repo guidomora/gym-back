@@ -6,4 +6,5 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <include file="001_create_gym_db_tables.sql" relativeToChangelogFile="true"/>
+    <include file="002_refactor_tables.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

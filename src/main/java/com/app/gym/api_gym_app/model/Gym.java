@@ -34,5 +34,4 @@ public class Gym {
     private Set<User> entrenadores;
 
 
-
 }
