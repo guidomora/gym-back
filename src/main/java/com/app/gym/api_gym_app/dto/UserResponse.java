@@ -1,7 +1,6 @@
 package com.app.gym.api_gym_app.dto;
 
 import com.app.gym.api_gym_app.enums.UserRole;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,17 +10,14 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+@AllArgsConstructor
+public class UserResponse {
+    private Long id;
     private String name;
     private String email;
-    private String password;
-    private UserRole role; // El frontend enviará TRAINER o STUDENT
+    private UserRole role;
     private String phoneNumber;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
-
     private String gymName;
 }
