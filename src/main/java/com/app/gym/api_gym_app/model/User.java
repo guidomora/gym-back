@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder 
@@ -53,6 +54,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "gym_id")
     private Gym gym;
     
+    @Column(unique = true)
+    private UUID qrToken;
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

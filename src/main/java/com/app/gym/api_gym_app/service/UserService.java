@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID; 
 
 @Service
 @Transactional
@@ -24,7 +25,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Ejercicio no encontrado con id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
         return userMapper.toUserDTO(user);
     }
 
@@ -34,4 +35,20 @@ public class UserService {
         return userMapper.toUserDTOs(users);
     }
 
+    @Transactional
+    public String getQrTokenByEmail(String email) {
+        
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con email: " + email));
+
+        UUID qrToken = user.getQrToken();
+
+        if (qrToken == null) {
+            qrToken = UUID.randomUUID();
+            user.setQrToken(qrToken);
+            userRepository.save(user); 
+        }
+
+        return qrToken.toString();
+    }
 }

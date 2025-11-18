@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +63,9 @@ public class AuthService {
                 .phoneNumber(request.getPhoneNumber())
                 .birthdate(request.getBirthdate())
                 .gym(gym)
+                .qrToken(UUID.randomUUID())
                 .build();
+                
 
         userRepository.save(user);
 

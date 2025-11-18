@@ -55,7 +55,7 @@ liquibase {
     def dbName = System.properties['dbName'] ?: 'gym_db'
     activities {
         main {
-            changeLogFile 'build.migrations/db/changelog.xml'
+            changeLogFile 'src/main/resources/db/changelog.xml'
             url "jdbc:postgresql://localhost:5432/$dbName"
             username 'admin'
             password 'admin123'
@@ -64,7 +64,8 @@ liquibase {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
+    systemProperty 'user.timezone', 'UTC'
 }
 
 springBoot {
