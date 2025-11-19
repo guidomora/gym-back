@@ -28,6 +28,11 @@ public class RoutineController {
         return ResponseEntity.ok(routineService.getRoutineById(id));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<RoutineDTO>> getRoutineByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(routineService.getRoutineByUserId(userId));
+    }
+
     @GetMapping
     public ResponseEntity<List<RoutineDTO>> getAllRoutines() {
         return ResponseEntity.ok(routineService.getAllRoutines());

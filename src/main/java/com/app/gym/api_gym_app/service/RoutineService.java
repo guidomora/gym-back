@@ -45,6 +45,12 @@ public class RoutineService {
     }
 
     @Transactional(readOnly = true)
+    public List<RoutineDTO> getRoutineByUserId(Long userId) {
+        List<Routine> routines = routineRepository.findByStudentId(userId);
+        return routineMapper.toRoutineDTOs(routines);
+    }
+
+    @Transactional(readOnly = true)
     public List<RoutineDTO> getAllRoutines() {
         List<Routine> routines = routineRepository.findAll();
         return routineMapper.toRoutineDTOs(routines);
