@@ -5,10 +5,15 @@ import com.app.gym.api_gym_app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.app.gym.api_gym_app.dto.UpdateUserRequest;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import java.util.List;
 import java.util.Map;  
@@ -39,6 +44,14 @@ public class UserController {
 
         // Devuelve un JSON simple: { "qrToken": "el-uuid-va-aqui" }
         return ResponseEntity.ok(Map.of("qrToken", qrToken));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponse> updateUser(
+            @PathVariable Long id,
+            @RequestBody com.app.gym.api_gym_app.dto.UpdateUserRequest request
+    ) {
+        return ResponseEntity.ok(userService.updateUser(id, request));
     }
 
 }

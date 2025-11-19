@@ -1,5 +1,6 @@
 package com.app.gym.api_gym_app.service;
 
+import com.app.gym.api_gym_app.dto.UpdateUserRequest;
 import com.app.gym.api_gym_app.dto.UserResponse;
 import com.app.gym.api_gym_app.exception.ResourceNotFoundException;
 import com.app.gym.api_gym_app.mapper.UserMapper;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.UUID; 
+import lombok.NonNull;
 
 @Service
 @Transactional
@@ -23,7 +26,7 @@ public class UserService {
     private UserMapper userMapper;
 
     @Transactional(readOnly = true)
-    public UserResponse getUserById(Long id) {
+    public UserResponse getUserById(@NonNull Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con id: " + id));
         return userMapper.toUserDTO(user);
@@ -50,5 +53,24 @@ public class UserService {
         }
 
         return qrToken.toString();
+    }
+
+    @SuppressWarnings("null")
+    public UserResponse updateUser(@NonNull Long id, UpdateUserRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        if (request.getName() != null) {
+            user.setName(request.getName());
+        }
+        if (request.getPhoneNumber() != null) {
+            user.setPhoneNumber(request.getPhoneNumber());
+        }
+        if (request.getBirthdate() != null) {
+            user.setBirthdate(request.getBirthdate());
+        }
+
+        User updatedUser = userRepository.save(user);
+        return userMapper.toUserDTO(updatedUser);
     }
 }
