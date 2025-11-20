@@ -54,7 +54,7 @@ public class User implements UserDetails {
     private Gym gym;
     
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "membership_id")
     private Membership membership;
 
     @Override

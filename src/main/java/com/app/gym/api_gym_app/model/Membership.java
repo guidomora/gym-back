@@ -27,7 +27,7 @@ public class Membership {
 
     //Generar key con generador de string (32 caracteres). Convertir string a QR
     @Column(nullable = false)
-    private String key;
+    private String membershipKey;
 
     //Se actualiza (dia actual + 30) al asignar una membresia a un usuario
     @Column

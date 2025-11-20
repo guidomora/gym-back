@@ -9,6 +9,6 @@ import com.app.gym.api_gym_app.model.Membership;
 
 public interface MembershipRepository extends JpaRepository<Membership, Long> {
 
-    Optional<Membership> findByKey(String key);
+    Optional<Membership> findByMembershipKey(String membershipKey);
     
 }

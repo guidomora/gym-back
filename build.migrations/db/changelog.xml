@@ -7,4 +7,5 @@
 
     <include file="001_create_gym_db_tables.sql" relativeToChangelogFile="true"/>
     <include file="002_refactor_tables.sql" relativeToChangelogFile="true"/>
+    <include file="003_membership_table.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

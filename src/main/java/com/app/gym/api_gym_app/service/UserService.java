@@ -42,11 +42,12 @@ public class UserService {
     }
 
     public UserResponse linkMembership(String membershipKey, User user) {
-        Membership membership = membershipRepository.findByKey(membershipKey)
+        Membership membership = membershipRepository.findByMembershipKey(membershipKey)
             .orElseThrow(() -> new ResourceNotFoundException("Membresia no encontrada con key: " + membershipKey));
-        if (membership.getExpirationDate()!=null) {
+        if (membership.getExpirationDate()==null) {
             membership.setExpirationDate(LocalDate.now().plusDays(30));
             user.setMembership(membership);
+            membershipRepository.save(membership);
             userRepository.save(user);
             return userMapper.toUserDTO(user);
         } else {
