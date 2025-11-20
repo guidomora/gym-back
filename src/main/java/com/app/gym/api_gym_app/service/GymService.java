@@ -31,11 +31,6 @@ public class GymService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El gimnasio es obligatorio");
         }
 
-        String normalizedGym = gymName.toLowerCase(Locale.ROOT).trim();
-        if (!AVAILABLE_GYMS.contains(normalizedGym)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gimnasio no disponible para registro");
-        }
-
         return gymRepository.findByNombreIgnoreCase(gymName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Gimnasio no encontrado"));
     }
