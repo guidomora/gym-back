@@ -1,8 +1,6 @@
 package com.app.gym.api_gym_app.dto;
 
 import com.app.gym.api_gym_app.enums.UserRole;
-import com.app.gym.api_gym_app.model.Membership;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +20,4 @@ public class UserResponse {
     private String phoneNumber;
     private LocalDate birthdate;
     private String gymName;
-    private Membership membership;
 }
