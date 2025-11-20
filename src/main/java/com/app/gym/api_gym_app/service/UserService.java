@@ -46,10 +46,12 @@ public class UserService {
             .orElseThrow(() -> new ResourceNotFoundException("Membresia no encontrada con key: " + membershipKey));
         if (membership.getExpirationDate()==null) {
             membership.setExpirationDate(LocalDate.now().plusDays(30));
-            user.setMembership(membership);
             membershipRepository.save(membership);
-            userRepository.save(user);
-            return userMapper.toUserDTO(user);
+
+            User managedUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con Id:" + user.getId()) );
+            managedUser.setMembership(membership);
+            return userMapper.toUserDTO(managedUser);
         } else {
             throw new ResourceAlreadyUsed("La membresia ya esta asociada a un usuario existente");
         }
