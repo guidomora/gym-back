@@ -53,7 +53,10 @@ public class User implements UserDetails {
     @JoinColumn(name = "gym_id")
     private Gym gym;
     
-    
+    @OneToOne
+    @JoinColumn(name = "membership_id")
+    private Membership membership;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -68,6 +71,7 @@ public class User implements UserDetails {
         this.role = role;
         this.routines = new HashSet<>();
         this.gym = null;
+        this.membership = null;
     }
     
     @Override
